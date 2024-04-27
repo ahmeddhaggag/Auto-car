@@ -36,6 +36,33 @@ void Timer0_voidGeneratePWM(u8 Copy_u8DutyCycle){
 }
 
 
+void Timer1_voidGeneratePWM(u8 Copy_u8Pin, u8 Copy_u8DutyCycle){
+	TCCR1A = 0;
+	TCCR1B = 0;
+#if WGM_MODE == FAST_PWM
+	SET_BIT(TCCR1A, TCCR1A_WGM10);
+	CLR_BIT(TCCR1A, TCCR1A_WGM11);
+	SET_BIT(TCCR1A, TCCR1B_WGM12);
+#endif
+#if TIMER0_u8_PRESCALER == DIVIDE_BY_8
+	CLR_BIT(TCCR1B, TCCR1B_CS10);
+	SET_BIT(TCCR1B, TCCR1B_CS11);
+	CLR_BIT(TCCR1B, TCCR1B_CS12);
+#endif
+    if(Copy_u8Pin == OC1A_PIN ){
+	SET_BIT(TCCR1A, TCCR1A_COMA0);
+	SET_BIT(TCCR1A, TCCR1A_COMA1);
+	OCR1AL = (u8)floorf(Copy_u8DutyCycle*255/100);
+    } else if(Copy_u8Pin == OC1B_PIN){
+    	SET_BIT(TCCR1A, TCCR1A_COMB0);
+    	SET_BIT(TCCR1A, TCCR1A_COMB1);
+	OCR1BL = (u8)floorf(Copy_u8DutyCycle*255/100);
+    }
+}
+
+
+
+
 void Timer2_voidGeneratePWM(u8 Copy_u8DutyCycle){
 	TCCR2 = 0;
 #if WGM_MODE == FAST_PWM
