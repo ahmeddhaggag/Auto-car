@@ -5,6 +5,8 @@
  *  Created on: 28 April 2024
  *      Author: Maab-Sayed 
  */
+#include "STD_TYPES.h"
+#include "bitmath.h"
  #include "ultrasonicSensor.h"
 /* Function prototypes */
 void Timer1_Init(Timer1_Mode_t mode, Timer1_OCRA1_Config_t OCRA1_config, Timer1_OCRB1_Config_t OCRB1_config);
@@ -14,12 +16,12 @@ void Timer1_Interrupt_COMPA_enable(void);
 void Timer1_InputCpetureEdge(Timer1_ICU_Edge_t edge);
 void Timer1_ICU_InterruptEnable(void);
 void Timer1_ICU_InterruptDisnable(void);
-void _delay_us(uint16_t us);
-void Dio_Write(uint8_t pin, uint8_t value);
+void _delay_us(u16 us);
+void Dio_Write(u8 pin, u8 value);
 
-static volatile uint16_t ut1, ut2; // Capture values for rising and falling edges
-static volatile uint8_t uflag = 0; // Flag for capture events (0: idle, 1: rising, 2: falling)
-static volatile uint16_t overflow_count = 0; // Counter for timer overflows
+static volatile u16 ut1, ut2; // Capture values for rising and falling edges
+static volatile u8 uflag = 0; // Flag for capture events (0: idle, 1: rising, 2: falling)
+static volatile u16 overflow_count = 0; // Counter for timer overflows
 
 static void Func_ICU(void) {
     if (uflag == 0) {
@@ -46,9 +48,9 @@ void Ultrasonic_init(void) {
     TMR1_Interrupt_COMPA_enable();     /* Enable COMPARE_A interrupt */
 }
 
-uint8_t UltrasonicReadDistance(Ultrasonic_t *ultra) {
-    uint8_t distance = 0;
-    uint32_t total_time = 0;
+u8 UltrasonicReadDistance(Ultrasonic_t *ultra) {
+    u8 distance = 0;
+    u32 total_time = 0;
 
     uflag = 0; /* Reset flag */
     overflow_count = 0; /* Reset overflow counter */
@@ -65,7 +67,7 @@ uint8_t UltrasonicReadDistance(Ultrasonic_t *ultra) {
         
     }
 
-    total_time = (ut2 - ut1) + ((uint32_t)overflow_count * 65535); /* Calculate total time */
+    total_time = (ut2 - ut1) + ((u32)overflow_count * 65535); /* Calculate total time */
 
     distance = total_time / 58; /* Convert time to distance */
 
