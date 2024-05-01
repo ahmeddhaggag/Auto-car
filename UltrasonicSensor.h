@@ -11,7 +11,8 @@
 
 #ifndef HAL_ULTRASONICSENSOR_ULTRASONICSENSOR_H_
 #define HAL_ULTRASONICSENSOR_ULTRASONICSENSOR_H_
-
+#include "STD_TYPES.h"
+#include "bitmath.h"
 #include "../../MCAL/Dio/Dio.h"
 #include "../../MCAL/Timer1/Timer1.h"
 
