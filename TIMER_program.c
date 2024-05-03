@@ -78,7 +78,7 @@ void Timer1_voidInputCapture(u8 Copy_u8Edge){
 }
 
 
-u16 Timer1_u8MeasurePulseDuration(){
+u16 Timer1_u16MeasurePulseDuration(){
 	u8 edge =0;
 	u16 high =0, low =0;
 		Timer1_voidInputCapture(edge++);
