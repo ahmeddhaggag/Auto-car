@@ -22,6 +22,10 @@ void Timer0_voidGeneratePWM(u8 Copy_u8DutyCycle);
 
 void Timer1_voidGeneratePWM(u8 Copy_u8Pin, u8 Copy_u8DutyCycle);
 
+void Timer1_voidInputCapture(u8 Copy_u8Edge);
+
+u16 Timer1_u8MeasurePulseDuration();
+
 void Timer2_voidGeneratePWM(u8 Copy_u8DutyCycle);
 
 void Timer0_voidSetPreloadValue(u8 Copy_u8PreloadValue);

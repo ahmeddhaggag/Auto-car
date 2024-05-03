@@ -10,7 +10,7 @@
 #ifndef TIMER_REGISTER_H_
 #define TIMER_REGISTER_H_
 
-#define TCCR0			*((volatile u8*)0x53)		/*Timer/counter 0 control register*/
+#define TCCR0_REG			*((volatile u8*)0x53)		/*Timer/counter 0 control register*/
 #define TCCR0_WGM00		6							/*Waveform generation mode bit 0*/
 #define TCCR0_WGM01		3                           /*Waveform generation mode bit 1*/
 #define TCCR0_CS00        0
@@ -22,7 +22,7 @@
 
 
 
-#define TCCR1A         *((volatile u8*)0x4f)
+#define TCCR1A_REG        *((volatile u8*)0x4f)
 #define TCCR1A_WGM10           0
 #define TCCR1A_WGM11           1
 #define TCCR1A_FOC1B           2
@@ -34,7 +34,7 @@
 
 
 
-#define TCCR1B         *((volatile u8*)0x4e)
+#define TCCR1B_REG         *((volatile u8*)0x4e)
 #define TCCR1B_CS10           0
 #define TCCR1B_CS11           1
 #define TCCR1B_CS12           2
@@ -49,7 +49,8 @@
 
 
 
-#define TCCR2			*((volatile u8*)0x45)		/*Timer/counter 0 control register*/
+
+#define TCCR2_REG			*((volatile u8*)0x45)		/*Timer/counter 0 control register*/
 #define TCCR0_WGM20		6							/*Waveform generation mode bit 0*/
 #define TCCR0_WGM21		3                           /*Waveform generation mode bit 1*/
 #define TCCR0_CS20        0
