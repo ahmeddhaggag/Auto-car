@@ -20,9 +20,15 @@
 #define speedR_PIN DIO_PIN3
 #define speedL_PIN DIO_PIN7
 
+void Forward();
 
+void Backward();
 
+void Right();
 
+void Left();
+
+void Stop();
 
 
 
