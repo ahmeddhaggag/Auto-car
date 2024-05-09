@@ -195,7 +195,7 @@ static void Func_ICU()
 ISR(TIMER1_OVF_vect)
 {
 	if(TMR1_InterriptOveFlow)
-		TMR1_InterriptOveFlow();
+		TMR1_InterruptOveFlow();
 }
 
 void Timer2_voidGeneratePWM(u8 Copy_u8DutyCycle){
