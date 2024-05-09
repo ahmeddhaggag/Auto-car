@@ -11,6 +11,7 @@
 #define MOTOR2_FORWARD_PIN  DIO_PIN2
 #define MOTOR2_BACKWARD_PIN DIO_PIN3
 
+#define STOP_DISTANCE     40
 // Define motor speeds
 #define MOTOR_SPEED_FAST 255
 #define MOTOR_SPEED_SLOW 128
