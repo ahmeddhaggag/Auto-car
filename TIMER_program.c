@@ -69,19 +69,19 @@ void Timer1_SetCallBack(void (*tmr1_ptf)(void))
 	TMR1_InterriptOveFlow = tmr1_ptf;
 }
 
-void TIMER1_Set_OCR1A(uint16 _value)
+void TIMER1_Set_OCR1A(u16 _value)
 {
 	OCR1A=_value;
 }
-void TIMER1_Set_OCR1B(uint16 _value)
+void TIMER1_Set_OCR1B(u16 _value)
 {
 	OCR1B=_value;
 }
-void TIMER1_Set_ICR1(uint16 _value)
+void TIMER1_Set_ICR1(u16 _value)
 {
 	ICR1=_value;
 }
-void TIMER1_Set_TCNT1(uint16 _value)
+void TIMER1_Set_TCNT1(u16 _value)
 {
 	TCNT1=_value;
 }
