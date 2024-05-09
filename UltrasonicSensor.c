@@ -20,7 +20,7 @@ void Timer1_Init(Timer1_Mode_t mode, Timer1_OCRA1_Config_t OCRA1_config, Timer1_
 void Timer1_ICU_SetCallBack(void (*callback_func)(void));
 void Timer1_SetCallBack_COMPA(void (*callback_func)(void));
 void Timer1_Interrupt_COMPA_enable(void);
-void Timer1_InputCpetureEdge(Timer1_ICU_Edge_t edge);
+void Timer1_InputCapetureEdge(Timer1_ICU_Edge_t edge);
 void Timer1_ICU_InterruptEnable(void);
 void Timer1_ICU_InterruptDisnable(void);
 void _delay_us(u16 us);
