@@ -64,7 +64,7 @@ void Timer1_Interrupt_Disable()
 	CLEAR_BIT(TIMSK,TOIE1);
 }
 
-void Timer1_Set_u8CallBack(void (*tmr1_ptf)(void))
+void Timer1_Set_u8_CallBack(void (*tmr1_ptf)(void))
 {
 	TMR1_InterriptOveFlow = tmr1_ptf;
 }
