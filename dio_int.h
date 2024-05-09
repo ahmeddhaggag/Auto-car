@@ -29,6 +29,7 @@
 
 #define DIO_HIGH 0xff
 #define DIO_LOW 0
+#define PIN_COUNT 20
 
 
 void DIO_voidSetPinDirection(u8 Copy_u8PortID, u8 Copy_u8PinID, u8 CopyDirection);
