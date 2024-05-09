@@ -170,6 +170,33 @@ void PWM_measure(u32 *pfeq,u8 * pduty)
 	*pfeq =(u32)1000000/((u32)Ton+Toff);
 
 
+static void Func_ICU()
+{
+	if(flag==0)
+	{
+		t1=ICR1;
+		Timer1_InputCpetureEdge(FALLING_EDGE);
+		flag=1;
+
+	}
+	else if(flag==1)
+	{
+		t2=ICR1;
+		Timer1_InputCpetureEdge(RISING_EDGE);
+		flag=2;
+	}
+	else if(flag==2)
+	{
+		t3=ICR1;
+		Timer1_ICU_InterruptDisnable();
+		flag=3;
+	}
+}
+ISR(TIMER1_OVF_vect)
+{
+	if(TMR1_InterriptOveFlow)
+		TMR1_InterriptOveFlow();
+}
 
 void Timer2_voidGeneratePWM(u8 Copy_u8DutyCycle){
 	TCCR2 = 0;
