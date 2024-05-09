@@ -9,6 +9,7 @@
 
 #ifndef TIMER_INTERFACE_H_
 #define TIMER_INTERFACE_H_
+#include "STD_TYPES.h"
 
 #define OC1A_PIN 0       //PORTD PIN5
 #define OC1B_PIN 1       //PORTD PIN4
@@ -65,31 +66,22 @@ typedef enum{
 void Timer0_voidInit(void);
 
 u8 Timer0_u8OvSetCallBack(void (*Copy_pvCallBackFunc)(void));
-
 void Timer0_voidGeneratePWM(u8 Copy_u8DutyCycle);
-
-void Timer1_Init(uint8 mode ,OCRA_Phase_fast_pwm outputa,OCRB_Phase_fast_pwm outputb);
-
+void Timer1_Init(u8 mode ,OCRA_Phase_fast_pwm outputa,OCRB_Phase_fast_pwm outputb);
 void Timer1_Interrupt_Enable();
-
 void Timer1_Interrupt_Disable();
-
 void Timer1_Set_u8_CallBack(void (*tmr1_ptf)(void));
-
-void TIMER1_Set_OCR1A(uint16 Copy_u16Value);
-
-void TIMER1_Set_OCR1B(uint16 Copy_u16Value);
-
-void TIMER1_Set_ICR1(uint16 Copy_u16Value);
-
-void TIMER1_Set_TCNT1(uint16 Copy_u16Value);
-
+void TIMER1_Set_OCR1A(u16 Copy_u16Value);
+void TIMER1_Set_OCR1B(u16 Copy_u16Value);
+void TIMER1_Set_ICR1(u16 Copy_u16Value);
+void TIMER1_Set_TCNT1(u16 Copy_u16Value);
+void Timer1_ICU_InterruptEnable();
+void Timer1_ICU_InterruptDisnable();
 void Timer1_voidGeneratePWM(u8 Copy_u8Pin, u8 Copy_u8DutyCycle);
-
-void Timer1_voidInputCapture(u8 Copy_u8Edge);
+void Timer1_voidInputCapture(Edge_t _edge));
 
 u16 Timer1_u16MeasurePulseDuration();
-
+void PWM_measure(u32 *pfeq,u8 * pduty);
 void Timer2_voidGeneratePWM(u8 Copy_u8DutyCycle);
 
 void Timer0_voidSetPreloadValue(u8 Copy_u8PreloadValue);
