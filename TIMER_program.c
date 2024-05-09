@@ -17,6 +17,13 @@
 #include "TIMER_config.h"
 
 
+static void (*(TMR1_InterruptOveFlow)) (void);
+static void (*(TMR1_InterruptComA)) (void);
+static void (*(TMR1_InterruptComB)) (void);
+static void (*(TMR1_InterrupICU)) (void);
+static void Func_ICU();
+u8 flag=0;
+volatile u16 t1,t2,t3;
 
 void Timer0_voidGeneratePWM(u8 Copy_u8DutyCycle){
 #if WGM_MODE == FAST_PWM
@@ -33,8 +40,51 @@ void Timer0_voidGeneratePWM(u8 Copy_u8DutyCycle){
 	OCR0 = (u8)floorf(Copy_u8DutyCycle*256/100) - 1;
 
 }
+void Timer1_Init(u8 mode ,OCRA_Phase_fast_pwm outputa,OCRB_Phase_fast_pwm outputb){
+	TIMER1_SET_MODE(mode);
+	TIMER1_SET_PRESCALLER(TIMER1_PRESCALLER);
+	TIMER1_OCR1A_SET_CHAN_MODE(outputa);
+	TIMER1_OCR1A_SET_CHAN_MODE(outputb);
+	if(outputa !=OCRA1_DISCONNECTED)
+	{
+		SET_BIT(DDRD,5);
+	}
+	if(outputa !=OCRB1_DISCONNECTED)
+	{
+		SET_BIT(DDRD,4);
+	}
+}
 
+void Timer1_Interrupt_Enable()
+{
+	SET_BIT(TIMSK,TOIE1);
+}
+void Timer1_Interrupt_Disable()
+{
+	CLEAR_BIT(TIMSK,TOIE1);
+}
 
+void Timer1_SetCallBack(void (*tmr1_ptf)(void))
+{
+	TMR1_InterriptOveFlow = tmr1_ptf;
+}
+
+void TIMER1_Set_OCR1A(uint16 _value)
+{
+	OCR1A=_value;
+}
+void TIMER1_Set_OCR1B(uint16 _value)
+{
+	OCR1B=_value;
+}
+void TIMER1_Set_ICR1(uint16 _value)
+{
+	ICR1=_value;
+}
+void TIMER1_Set_TCNT1(uint16 _value)
+{
+	TCNT1=_value;
+}
 void Timer1_voidGeneratePWM(u8 Copy_u8Pin, u8 Copy_u8DutyCycle){
 #if WGM_MODE == FAST_PWM
 	SET_BIT(TCCR1A, TCCR1A_WGM10);
