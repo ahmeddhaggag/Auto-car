@@ -197,6 +197,13 @@ ISR(TIMER1_OVF_vect)
 	if(TMR1_InterriptOveFlow)
 		TMR1_InterruptOveFlow();
 }
+void Timer1_SetCallBack_COMPA(void (*tmr1_ptf)(void))
+{
+	TMR1_InterriptComA=tmr1_ptf;
+}
+void TMR1_Interrupt_COMPA_Disable(){
+	CLEAR_BIT(TIMSK,OCIE1A);
+}
 
 void Timer2_voidGeneratePWM(u8 Copy_u8DutyCycle){
 	TCCR2 = 0;
