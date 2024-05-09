@@ -4,10 +4,17 @@
  *
  *  Created on: 28 April 2024
  *      Author: Maab-Sayed 
+  version ; 1.1
  */
 #include "STD_TYPES.h"
 #include "bitmath.h"
+#include "TIMER_private.h"
+#include "TIMER_register.h"
+#include "TIMER_interface.h"
+#include "TIMER_config.h"
  #include "ultrasonicSensor.h"
+
+
 /* Function prototypes */
 void Timer1_Init(Timer1_Mode_t mode, Timer1_OCRA1_Config_t OCRA1_config, Timer1_OCRB1_Config_t OCRB1_config);
 void Timer1_ICU_SetCallBack(void (*callback_func)(void));
