@@ -15,7 +15,7 @@
 #include "bitmath.h"
 #include "Dio_int.h"
 #include "TIMER_interface.h"
-#include "TIMER_program.c "
+#include "TIMER_private.h"
 /*
 -------------- this This header file defines the basic
  interface for an ultrasonic sensor driver.
