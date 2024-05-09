@@ -17,7 +17,7 @@ void Timer1_InputCpetureEdge(Timer1_ICU_Edge_t edge);
 void Timer1_ICU_InterruptEnable(void);
 void Timer1_ICU_InterruptDisnable(void);
 void _delay_us(u16 us);
-void Dio_Write(u8 pin, u8 value);
+void  DIO_voidSetPortValue(u8 Copy_u8PortID, u8 Copy_u8Value);
 
 static volatile u16 ut1, ut2; // Capture values for rising and falling edges
 static volatile u8 uflag = 0; // Flag for capture events (0: idle, 1: rising, 2: falling)
@@ -56,9 +56,9 @@ u8 UltrasonicReadDistance(Ultrasonic_t *ultra) {
     overflow_count = 0; /* Reset overflow counter */
 
     TCNT1 = 0; /* Clear Timer1 counter */
-    Dio_Write(PORTB_0, HIGH);  /* Trigger high pulse */
+    DIO_voidSetPortValue(PORTB_0, HIGH);  /* Trigger high pulse */
     _delay_us(10);             /* Trigger pulse duration */
-    Dio_Write(PORTB_0, LOW);   /* Trigger low pulse */
+    DIO_voidSetPortValue(PORTB_0, LOW);   /* Trigger low pulse */
 
     Timer1_InputCpetureEdge(RISING_EDGE); /* Capture rising edge for pulse start */
     Timer1_ICU_InterruptEnable();      /* Enable ICU interrupt */
