@@ -13,8 +13,8 @@
 #define HAL_ULTRASONICSENSOR_ULTRASONICSENSOR_H_
 #include "STD_TYPES.h"
 #include "bitmath.h"
-#include "../../MCAL/Dio/Dio.h"
-#include "../../MCAL/Timer1/Timer1.h"
+#include "Dio_int.h"
+#include ".TIMER_interface.h"
 
 /*
 -------------- this This header file defines the basic
