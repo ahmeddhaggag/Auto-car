@@ -109,24 +109,32 @@ void Timer1_voidGeneratePWM(u8 Copy_u8Pin, u8 Copy_u8DutyCycle){
 }
 
 
-void Timer1_voidInputCapture(u8 Copy_u8Edge){
-	TCCR1A =0;
-	TCCR1B =0;
-#if TIMER0_u8_PRESCALER == DIVIDE_BY_8
-	CLR_BIT(TCCR1B, TCCR1B_CS10);
-	SET_BIT(TCCR1B, TCCR1B_CS11);
-	CLR_BIT(TCCR1B, TCCR1B_CS12);
-#endif
-
-	if(Copy_u8Edge%2 == 0){
-		SET_BIT(TCCR1B, TCCR1B_ICES1);
-	}else{
-		CLR_BIT(TCCR1B, TCCR1B_ICES1);
+void Timer1_InputCpetureEdge(Edge_t _edge)
+{
+	if(FALLING_EDGE ==_edge)
+	{
+		CLEAR_BIT(TCCR1B,ICES1);
 	}
-//	SET_BIT(TIMSK, 5);
-
+	else if(RISING_EDGE ==_edge)
+	{
+		SET_BIT(TCCR1B,ICES1);
+	}
 }
 
+void Timer1_ICU_InterruptEnable()
+{
+	SET_BIT(TIMSK,TICIE1);
+}
+void Timer1_ICU_InterruptDisnable()
+{
+	CLEAR_BIT(TIMSK,TICIE1);
+}
+void Timer1_ICU_SetCallBack(void (*(TMR1_ICU)) (void))
+{
+
+		TMR1_InterrupICU=TMR1_ICU;
+
+}
 
 u16 Timer1_u16MeasurePulseDuration(){
 	u8 edge =0;
