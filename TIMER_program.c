@@ -64,7 +64,7 @@ void Timer1_Interrupt_Disable()
 	CLEAR_BIT(TIMSK,TOIE1);
 }
 
-void Timer1_SetCallBack(void (*tmr1_ptf)(void))
+void Timer1_Set_u8CallBack(void (*tmr1_ptf)(void))
 {
 	TMR1_InterriptOveFlow = tmr1_ptf;
 }
@@ -109,7 +109,7 @@ void Timer1_voidGeneratePWM(u8 Copy_u8Pin, u8 Copy_u8DutyCycle){
 }
 
 
-void Timer1_InputCpetureEdge(Edge_t _edge)
+void Timer1_InputCapetureEdge(Edge_t _edge)
 {
 	if(FALLING_EDGE ==_edge)
 	{
