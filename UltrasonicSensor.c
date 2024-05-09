@@ -56,9 +56,9 @@ u8 UltrasonicReadDistance(Ultrasonic_t *ultra) {
     overflow_count = 0; /* Reset overflow counter */
 
     TCNT1 = 0; /* Clear Timer1 counter */
-    DIO_voidSetPortValue(PORTB_0, HIGH);  /* Trigger high pulse */
+    DIO_voidSetPortValue(DIO_PORTB, HIGH);  /* Trigger high pulse */
     _delay_us(10);             /* Trigger pulse duration */
-    DIO_voidSetPortValue(PORTB_0, LOW);   /* Trigger low pulse */
+    DIO_voidSetPortValue(DIO_PORTB, LOW);   /* Trigger low pulse */
 
     Timer1_InputCpetureEdge(RISING_EDGE); /* Capture rising edge for pulse start */
     Timer1_ICU_InterruptEnable();      /* Enable ICU interrupt */
