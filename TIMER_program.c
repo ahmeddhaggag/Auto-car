@@ -155,6 +155,21 @@ u16 Timer1_u16MeasurePulseDuration(){
 
 			return high - low;
 }
+void PWM_measure(u32 *pfeq,u8 * pduty)
+{
+	u16 Ton,Toff;
+	TCNT1=0;
+	Timer1_ICU_SetCallBack(Func_ICU);
+	Timer1_InputCpetureEdge(RISING_EDGE);
+	Timer1_ICU_InterruptEnable();
+	flag=0;
+	while(flag<3);
+	Ton=t2-t1;
+	Toff=t3-t2;
+	*pduty = ((u32)Ton*100)/((u32)Ton+Toff);
+	*pfeq =(u32)1000000/((u32)Ton+Toff);
+
+
 
 void Timer2_voidGeneratePWM(u8 Copy_u8DutyCycle){
 	TCCR2 = 0;
