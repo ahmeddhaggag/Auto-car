@@ -79,7 +79,7 @@ void Timer1_ICU_InterruptEnable();
 void Timer1_ICU_InterruptDisnable();
 void Timer1_voidGeneratePWM(u8 Copy_u8Pin, u8 Copy_u8DutyCycle);
 void Timer1_voidInputCapture(Edge_t _edge));
-
+void Timer1_SetCallBack_COMPA(void (*tmr1_ptf)(void));
 u16 Timer1_u16MeasurePulseDuration();
 void PWM_measure(u32 *pfeq,u8 * pduty);
 void Timer2_voidGeneratePWM(u8 Copy_u8DutyCycle);
