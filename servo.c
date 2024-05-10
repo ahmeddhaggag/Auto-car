@@ -7,7 +7,8 @@
  */ 
 #include "servo.h"
 #include <util/delay.h>
-#include "TIMER_interface.h"
+#include"servo.h"
+#include"TIMER_interface.h"
 
 void servo_init()
 {
@@ -16,26 +17,22 @@ void servo_init()
 }
 
 
-void srv_MOVE_TO_0()
+void SRV_MOVE_TO_0()
 {
-	
-	Timer1_voidGeneratePWM()
-	
-	OCR1A = 1000 ;
+	Timer1_voidGeneratePWM(OC1A_PIN,4);
 	
 	_delay_ms(1000);
 }
-void srv_MOVE_TO_90()
+void SRV_MOVE_TO_90()
 {
-	Timer1_voidGeneratePWM()
+	Timer1_voidGeneratePWM(OC1A_PIN,9);
+
 	
-	OCR1A = 1500 ;
 	_delay_ms(1000);
 }
-void srv_MOVE_TO_180()
+void SRV_MOVE_TO_180()
 {
-	Timer1_voidGeneratePWM()
+	Timer1_voidGeneratePWM(OC1A_PIN,15);
 	
-	OCR1A = 2000 ;
 	_delay_ms(1000);
 }

@@ -18,27 +18,31 @@
  * 			  5- DIVIDE_BY_1024
  * */
 
+#define DIVIDE_BY_1        1
+#define DIVIDE_BY_8        2
+#define DIVIDE_BY_64       3
+#define DIVIDE_BY_256      4
+#define DIVIDE_BY_1024     5
 
 
 #define MAX 255
 #define TIMER0_u8_PRESCALER			DIVIDE_BY_8
+#define TIMER1_u8_PRESCALER			DIVIDE_BY_256
+#define TIMER2_u8_PRESCALER			DIVIDE_BY_8
+
+
+#define EIGHT_BIT 256
+#define NINE_BIT 512
+#define TEN_BIT 1024
+
+#define TIMER1_BIT_MODE  NINE_BIT
+
 
 /*Choose the preload value*/
 #define TIMER0_u8_PRELOAD			0
 #define FAST_PWM 0
 #define PHASE_PWM 1
-#define TIMER1_PRESCALLER     TIMER1_8_PRESCALER
 
-
-#define TIMER1_DISABLE               0X00
-#define TIMER1_1_PRESCALER           0X01
-#define TIMER1_8_PRESCALER           0X02
-#define TIMER1_64_PRESCALER          0X03
-#define TIMER1_256_PRESCALER         0X04
-#define TIMER1_1024_PRESCALER        0X05
-
-#define TIMER1_EXITRNAL_RISING       0X07
-#define TIMER1_EXITRNAL_FALLING      0X06
 #define WGM_MODE FAST_PWM
 
 #endif
