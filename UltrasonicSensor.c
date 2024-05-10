@@ -67,7 +67,7 @@ u8 UltrasonicReadDistance(Ultrasonic_t *ultra) {
     _delay_us(10);             /* Trigger pulse duration */
     DIO_voidSetPortValue(DIO_PORTB, LOW);   /* Trigger low pulse */
 
-    Timer1_InputCpetureEdge(RISING_EDGE); /* Capture rising edge for pulse start */
+    Timer1_InputCapetureEdge(RISING_EDGE); /* Capture rising edge for pulse start */
     Timer1_ICU_InterruptEnable();      /* Enable ICU interrupt */
 
     while (uflag < 2) {  /* Wait for both rising and falling edges */
