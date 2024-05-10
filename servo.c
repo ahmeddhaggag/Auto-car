@@ -5,7 +5,6 @@
  *  Author: MOSTFA AHMED *****************************
  *****************************************************
  */ 
-#include "servo.h"
 #include <util/delay.h>
 #include"servo.h"
 #include"TIMER_interface.h"
