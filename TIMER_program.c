@@ -110,8 +110,8 @@ u16 Timer1_u16MeasurePulseDuration(){
 			low = ICR1L;
 			low += (ICR1H<<8);
 			TIFR =  (1<<ICF1);
-			if(low < high){
-				low+= 65536;
+			if(high < low){
+				high+= 65536;
 			}
 
 			return high - low;
