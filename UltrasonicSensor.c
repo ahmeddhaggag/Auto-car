@@ -34,7 +34,7 @@ static void Func_ICU(void) {
     if (uflag == 0) {
         ut1 = ICR1;
         uflag = 1;
-        Timer1_InputCpetureEdge(FALLING_EDGE);  // Switch to capture falling edge
+        Timer1_InputCapetureEdge(FALLING_EDGE);  // Switch to capture falling edge
     } else if (uflag == 1) {
         ut2 = ICR1;
         uflag = 2;
