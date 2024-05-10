@@ -15,7 +15,7 @@ void Timer1_Init(Timer1_Mode_t mode, Timer1_OCRA1_Config_t OCRA1_config, Timer1_
 void Timer1_ICU_SetCallBack(void (*callback_func)(void));
 void Timer1_SetCallBack_COMPA(void (*callback_func)(void));
 void Timer1_Interrupt_COMPA_enable(void);
-void Timer1_InputCapetureEdge(Timer1_ICU_Edge_t edge);
+void Timer1_InputCaptureEdge(Timer1_ICU_Edge_t edge);
 void Timer1_ICU_InterruptEnable(void);
 void Timer1_ICU_InterruptDisnable(void);
 void _delay_us(u16 us);
@@ -29,7 +29,7 @@ static void Func_ICU(void) {
     if (uflag == 0) {
         ut1 = ICR1;
         uflag = 1;
-        Timer1_InputCapetureEdge(FALLING_EDGE);  // Switch to capture falling edge
+        Timer1_InputCaptureEdge(FALLING_EDGE);  // Switch to capture falling edge
     } else if (uflag == 1) {
         ut2 = ICR1;
         uflag = 2;
@@ -62,7 +62,7 @@ u8 UltrasonicReadDistance(Ultrasonic_t *ultra) {
     _delay_us(10);             /* Trigger pulse duration */
     DIO_voidSetPortValue(DIO_PORTB, LOW);   /* Trigger low pulse */
 
-    Timer1_InputCapetureEdge(RISING_EDGE); /* Capture rising edge for pulse start */
+    Timer1_InputCaptureEdge(RISING_EDGE); /* Capture rising edge for pulse start */
     Timer1_ICU_InterruptEnable();      /* Enable ICU interrupt */
 
     while (uflag < 2) {  /* Wait for both rising and falling edges */
