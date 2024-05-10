@@ -109,7 +109,7 @@ void Timer1_voidGeneratePWM(u8 Copy_u8Pin, u8 Copy_u8DutyCycle){
 }
 
 
-void Timer1_InputCapetureEdge(Edge_t _edge)
+void Timer1_InputCaptureEdge(Edge_t _edge)
 {
 	if(FALLING_EDGE ==_edge)
 	{
