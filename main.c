@@ -7,21 +7,23 @@
  
  */
 
-
-#include"avr/io.h"
-#include"util/delay.h"
-#include"STD_TYPES.H"
-#include"bitmath.h"
-#include"dio_int.h"
+#include <avr/io.h>
+#include <util/delay.h>
+#include "servo.h"
+#include "TIMER_interface.h"
+#include "DIO_int.h"
 #include"TIMER_interface.h"
+#include "UltrasonicSensor.h"
+#include"servo.h"
 
-/*---------------------------------MAAB SAYED--------------------------
-this code will intialize the ultrasoinc sensor------------------------
-*/
-Ultrasonic_t ultra ;
+
 u8 distance;
 u8 distance_right=0;
 u8 distance_left=0;
+
+#define STOP_DISTANCE
+#define CRASH_DISTANCE
+#define OBSTACLE_DISTANCE
 int main(){
 	sei();
 	DIO_voidSetPinDirection(DIO_PORTB, DIO_PIN3, DIO_OUTPUT);
@@ -30,23 +32,23 @@ int main(){
 	
 	while(1){
 		Timer0_voidGeneratePWM(70);
-		distance=UltrasonicReadDistance(&ultra);
+		distance=UltrasonicReadDistance();
 
 		if(distance > STOP_DISTANCE)
 		{
 
-			Robot_Move_Forward();
+			Forward();
 		}
 		else if (distance<STOP_DISTANCE)
 		{
-			Robot_Stop();
+			Stop();
 			Servo_angle(0);
 			_delay_ms(1000);
-			distance_right=UltrasonicReadDistance(&ultra);
+			distance_right=UltrasonicReadDistance();
 			_delay_ms(300);
 			// move forward
 			_delay_ms(1000);
-			distance_left=UltrasonicReadDistance(&ultra);
+			distance_left=UltrasonicReadDistance();
 			_delay_ms(300);
 		
 			if(distance_right>distance_left)
@@ -63,9 +65,6 @@ int main(){
 	}
 
 }
-
-
-
 	}
 
 	return 0;
