@@ -9,8 +9,8 @@
 
 
 
-#ifndef HAL_ULTRASONICSENSOR_ULTRASONICSENSOR_H_
-#define HAL_ULTRASONICSENSOR_ULTRASONICSENSOR_H_
+#ifndef ULTRASONIC_INT_H_
+#define ULTRASONIC_INT_H_
 #include<avr/io.h>
 #include<util/delay.h>
 #include"dio_int.h"
