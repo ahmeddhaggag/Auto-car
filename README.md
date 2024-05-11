@@ -1,5 +1,5 @@
-Autonmous Car
+Autonomous Car
 
 
 
-A car implemented using ATMega32 microcontroller which detects and avoids obstacles by using an ultrasonic sensor
+A car that detects and avoids obstacles, implemented using an ATMega32 microcontroller, ultrasonic sensor, two DC motors, an L298N motor driver and a servo motor. 
