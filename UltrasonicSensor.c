@@ -25,6 +25,21 @@ static volatile u16 ut1, ut2; // Capture values for rising and falling edges
 static volatile u8 uflag = 0; // Flag for capture events (0: idle, 1: rising, 2: falling)
 static volatile u16 overflow_count = 0; // Counter for timer overflows
 
+u16 UltrasonicReadDistance(){
+    u16 distance = 0;
+    u32 time = 0;
+
+    TCNT1 = 0; /* Clear Timer1 counter */
+    DIO_voidSetPinValue(ULTRASONIC_PORT,TRIG_PIN , DIO_HIGH);  /* Trigger high pulse */
+    _delay_us(10);             /* Trigger pulse duration */
+    DIO_voidSetPinValue(ULTRASONIC_PORT,TRIG_PIN , DIO_LOW);   /* Trigger low pulse */
+    time = Timer1_u32MeasurePulseDuration(); //each unit time is 1 us, prescaler 8
+
+    distance = (u16)((0.0346*time)/(2*1.5));
+    return distance;
+
+}
+
 static void Func_ICU(void) {
     if (uflag == 0) {
         ut1 = ICR1;
@@ -50,30 +65,4 @@ void Ultrasonic_init(void) {
     TMR1_Interrupt_COMPA_enable();     /* Enable COMPARE_A interrupt */
 }
 
-u8 UltrasonicReadDistance(Ultrasonic_t *ultra) {
-    u8 distance = 0;
-    u32 total_time = 0;
 
-    uflag = 0; /* Reset flag */
-    overflow_count = 0; /* Reset overflow counter */
-
-    TCNT1 = 0; /* Clear Timer1 counter */
-    DIO_voidSetPortValue(DIO_PORTB, HIGH);  /* Trigger high pulse */
-    _delay_us(10);             /* Trigger pulse duration */
-    DIO_voidSetPortValue(DIO_PORTB, LOW);   /* Trigger low pulse */
-
-    Timer1_InputCaptureEdge(RISING_EDGE); /* Capture rising edge for pulse start */
-    Timer1_ICU_InterruptEnable();      /* Enable ICU interrupt */
-
-    while (uflag < 2) {  /* Wait for both rising and falling edges */
-        
-    }
-
-    total_time = (ut2 - ut1) + ((u32)overflow_count * 65535); /* Calculate total time */
-
-    distance = total_time / 58; /* Convert time to distance */
-
-    Timer1_ICU_InterruptDisnable(); /* Disable ICU interrupt */
-
-    return distance;
-}
