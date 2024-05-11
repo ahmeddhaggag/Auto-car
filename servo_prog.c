@@ -6,7 +6,7 @@
  *****************************************************
  */ 
 #include <util/delay.h>
-#include"servo.h"
+#include"servo_int.h"
 #include"TIMER_interface.h"
 
 void servo_init()
