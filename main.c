@@ -1,70 +1,108 @@
 /*
 
  * main.c
+
  *
  *  Created on: Apr 25, 2024
  *      Author: Ahmed D. Haggag
- 
  */
 
-#include <avr/io.h>
-#include <util/delay.h>
-#include "servo.h"
-#include "TIMER_interface.h"
-#include "DIO_int.h"
+
+#include<avr/io.h>
+#include<avr/interrupt.h>
+#include<util/delay.h>
+#include"STD_TYPES.H"
+#include"bitmath.h"
+#include"dio_int.h"
 #include"TIMER_interface.h"
-#include "UltrasonicSensor.h"
-#include"servo.h"
 #include"DC_Motor_int.h"
+#include"ultrasonic_int.h"
+#include"servo.h"
 
-u8 distance;
-u8 distance_right=0;
-u8 distance_left=0;
+#define OBSTACLE_THRESHOLD  50
+#define CRASH_THRESHOLD     25
 
-#define STOP_DISTANCE
-#define CRASH_DISTANCE
-#define OBSTACLE_DISTANCE
+
 int main(){
-	sei();
-	DIO_voidSetPinDirection(DIO_PORTB, DIO_PIN3, DIO_OUTPUT);
 	DIO_voidSetPinDirection(DIO_PORTD, DIO_PIN7, DIO_OUTPUT);
-	Ultrasonic_init();
-	
+	DIO_voidSetPinDirection(DIO_PORTD, DIO_PIN5, DIO_OUTPUT);
+	DIO_voidSetPinDirection(DIO_PORTD, DIO_PIN4, DIO_OUTPUT);
+	DIO_voidSetPinDirection(DIO_PORTD, DIO_PIN3, DIO_OUTPUT);
+	DIO_voidSetPinDirection(DIO_PORTD, DIO_PIN1, DIO_OUTPUT);
+	DIO_voidSetPinDirection(DIO_PORTD, DIO_PIN6, DIO_INPUT);
+	DIO_voidSetPinDirection(DIO_PORTD, DIO_PIN0, DIO_OUTPUT);
+	DIO_voidSetPortDirection(DIO_PORTB, DIO_OUTPUT);
+	DIO_voidSetPortDirection(DIO_PORTC, DIO_OUTPUT);
+    sei();
+    TIMSK = (1<<TICIE1) | (1<<TOIE1);
+    u16 distance = 0;
 	while(1){
-		Timer0_voidGeneratePWM(70);
-		distance=UltrasonicReadDistance();
+		SRV_MOVE_TO_90();
+		  distance = UltrasonicReadDistance();
 
-		if(distance > STOP_DISTANCE)
-		{
-
-			Forward();
-		}
-		else if (distance<STOP_DISTANCE)
-		{
-			Stop();
-			Servo_angle(0);
-			_delay_ms(1000);
-			distance_right=UltrasonicReadDistance();
-			_delay_ms(300);
-			// move forward
-			_delay_ms(1000);
-			distance_left=UltrasonicReadDistance();
-			_delay_ms(300);
-		
-			if(distance_right>distance_left)
-			{
-				//servo rotate right
-			}
-			else if(distance_right<distance_left)
-			{
-			// servo rotate left
-			}
-
-		}
-
-	}
-
-}
+		        if (distance >= OBSTACLE_THRESHOLD) {
+		            Forward();
+		            DIO_voidSetPinValue(DIO_PORTD, DIO_PIN3, DIO_HIGH);
+		        } else if (distance <= CRASH_THRESHOLD) {
+		        	DIO_voidSetPinValue(DIO_PORTC, DIO_PIN7, DIO_HIGH);
+		            Stop();
+		            Backward();
+		            _delay_ms(1000);
+		            Stop();
+		            // Change direction
+		            SRV_MOVE_TO_0();
+		            distance = UltrasonicReadDistance();
+		            if (distance < OBSTACLE_THRESHOLD) {
+//		            	Backward();
+//		                _delay_ms(200);
+		                Right();
+		                _delay_ms(200);
+		            } else {
+		            	SRV_MOVE_TO_180();
+		            	distance = UltrasonicReadDistance();
+		            	if(distance < OBSTACLE_THRESHOLD){
+//		            		Backward();
+//		                 _delay_ms(200);
+		                Left();
+		                _delay_ms(200);
+		            	}else{
+		            		Backward();
+		            		_delay_ms(1000);
+		            		Right();
+		            		_delay_ms(550);
+		            	}
+		            }
+		            _delay_ms(500);
+		        } else {
+		            // Obstacle detected but not too close for a crash
+		            Stop();
+		            DIO_voidSetPinValue(DIO_PORTC, DIO_PIN2, DIO_HIGH);
+		            // Change direction
+		            SRV_MOVE_TO_0();
+		            distance = UltrasonicReadDistance();
+		            if (distance < OBSTACLE_THRESHOLD) {
+		            	Backward();
+		            	 _delay_ms(200);
+		               Right();
+		               _delay_ms(200);
+		            } else {
+		          		 SRV_MOVE_TO_180();
+		          		distance = UltrasonicReadDistance();
+		          		 if(distance < OBSTACLE_THRESHOLD){
+		          			 Backward();
+		          			 _delay_ms(200);
+		          		    Left();
+		          		  _delay_ms(200);
+		          		    }else{
+		          		      	Right(); //Rotate
+		          		 	_delay_ms(550);
+		            	}
+		          		DIO_voidSetPinValue(DIO_PORTD, DIO_PIN3, DIO_LOW);
+		          		DIO_voidSetPinValue(DIO_PORTC, DIO_PIN7, DIO_LOW);
+		          		DIO_voidSetPinValue(DIO_PORTC, DIO_PIN2, DIO_LOW);
+		            _delay_ms(200);
+		        }
+		    }
 	}
 
 	return 0;
