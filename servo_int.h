@@ -7,8 +7,8 @@
  */ 
 
 
-#ifndef SERVO_H_
-#define SERVO_H_
+#ifndef SERVO_INT_H_
+#define SERVO_INT_H_
 
 #include "STD_TYPES.H"
 #include "dio_int.h"s
