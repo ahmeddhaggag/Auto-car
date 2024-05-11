@@ -11,25 +11,25 @@
 
 #ifndef HAL_ULTRASONICSENSOR_ULTRASONICSENSOR_H_
 #define HAL_ULTRASONICSENSOR_ULTRASONICSENSOR_H_
-#include "STD_TYPES.h"
-#include "bitmath.h"
-#include "Dio_int.h"
-#include "TIMER_interface.h"
-#include "TIMER_private.h"
+#include<avr/io.h>
+#include<util/delay.h>
+#include"dio_int.h"
+#include"TIMER_interface.h"
 /*
 -------------- this This header file defines the basic
  interface for an ultrasonic sensor driver.
  It provides functions to initialize
  the sensor and read the distance to an object --------*/
 
-typedef struct{
-	channel_t Echo;
-	channel_t Trigger;
-}Ultrasonic_t; /*it represents the digital pin connected to the echo signal of the ultrasonic sensor */
 
-void Ultrasonic_init();  /* This function initializes the ultrasonic sensor */
+#define ULTRASONIC_PORT DIO_PORTD
 
-u8 UltrasonicReadDistance(Ultrasonic_t *ultra); /* defined unsigned int as u8 it should read the distance of ultrasonic  */
+
+#define ECHO_PIN DIO_PIN6
+#define TRIG_PIN DIO_PIN1
+
+
+u16 UltrasonicReadDistance(); /* defined unsigned int as u16 it should read the distance of ultrasonic  */
 
 
 #endif 
