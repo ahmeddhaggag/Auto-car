@@ -15,7 +15,7 @@
 #include"TIMER_interface.h"
 #include "UltrasonicSensor.h"
 #include"servo.h"
-
+#include"DC_Motor_int.h"
 
 u8 distance;
 u8 distance_right=0;
