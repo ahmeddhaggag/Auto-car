@@ -38,8 +38,8 @@ void Right(){
 	DIO_voidSetPinValue(in_PORT, in3_PIN, DIO_HIGH);
 	DIO_voidSetPinValue(in_PORT, in4_PIN, DIO_LOW);
 
-	Timer0_voidGeneratePWM(80);      //speedR
-	Timer2_voidGeneratePWM(50);       //speedL
+	Timer0_voidGeneratePWM(50);      //speedR
+	Timer2_voidGeneratePWM(80);       //speedL
 }
 
 void Left(){
@@ -48,8 +48,8 @@ void Left(){
 	DIO_voidSetPinValue(in_PORT, in3_PIN, DIO_HIGH);
 	DIO_voidSetPinValue(in_PORT, in4_PIN, DIO_LOW);
 
-	Timer0_voidGeneratePWM(50);      //speedR
-	Timer2_voidGeneratePWM(80);       //speedL
+	Timer0_voidGeneratePWM(80);      //speedR
+	Timer2_voidGeneratePWM(50);       //speedL
 }
 
 void Stop(){
