@@ -42,9 +42,9 @@ int main(){
 
 		        if (distance >= OBSTACLE_THRESHOLD) {
 		            Forward();
-		            DIO_voidSetPinValue(DIO_PORTD, DIO_PIN3, DIO_HIGH);
+		            DIO_voidSetPinValue(DIO_PORTD, DIO_PIN3, DIO_HIGH);  //LED2 ON
 		        } else if (distance <= CRASH_THRESHOLD) {
-		        	DIO_voidSetPinValue(DIO_PORTC, DIO_PIN7, DIO_HIGH);
+		        	DIO_voidSetPinValue(DIO_PORTC, DIO_PIN7, DIO_HIGH); //LED1 ON
 		            Stop();
 		            Backward();
 		            _delay_ms(1000);
@@ -52,17 +52,15 @@ int main(){
 		            // Change direction
 		            SRV_MOVE_TO_0();
 		            distance = UltrasonicReadDistance();
-		            if (distance < OBSTACLE_THRESHOLD) {
-//		            	Backward();
-//		                _delay_ms(200);
+		            if (distance > OBSTACLE_THRESHOLD) {
+
 		                Right();
 		                _delay_ms(200);
 		            } else {
 		            	SRV_MOVE_TO_180();
 		            	distance = UltrasonicReadDistance();
-		            	if(distance < OBSTACLE_THRESHOLD){
-//		            		Backward();
-//		                 _delay_ms(200);
+		            	if(distance > OBSTACLE_THRESHOLD){
+
 		                Left();
 		                _delay_ms(200);
 		            	}else{
@@ -76,11 +74,11 @@ int main(){
 		        } else {
 		            // Obstacle detected but not too close for a crash
 		            Stop();
-		            DIO_voidSetPinValue(DIO_PORTC, DIO_PIN2, DIO_HIGH);
+		            DIO_voidSetPinValue(DIO_PORTC, DIO_PIN2, DIO_HIGH); //LED3 ON
 		            // Change direction
 		            SRV_MOVE_TO_0();
 		            distance = UltrasonicReadDistance();
-		            if (distance < OBSTACLE_THRESHOLD) {
+		            if (distance > OBSTACLE_THRESHOLD) {
 		            	Backward();
 		            	 _delay_ms(200);
 		               Right();
@@ -88,7 +86,7 @@ int main(){
 		            } else {
 		          		 SRV_MOVE_TO_180();
 		          		distance = UltrasonicReadDistance();
-		          		 if(distance < OBSTACLE_THRESHOLD){
+		          		 if(distance > OBSTACLE_THRESHOLD){
 		          			 Backward();
 		          			 _delay_ms(200);
 		          		    Left();
@@ -100,7 +98,7 @@ int main(){
 		          		DIO_voidSetPinValue(DIO_PORTD, DIO_PIN3, DIO_LOW);
 		          		DIO_voidSetPinValue(DIO_PORTC, DIO_PIN7, DIO_LOW);
 		          		DIO_voidSetPinValue(DIO_PORTC, DIO_PIN2, DIO_LOW);
-		            _delay_ms(200);
+		                        //LEDS OFF
 		        }
 		    }
 	}
