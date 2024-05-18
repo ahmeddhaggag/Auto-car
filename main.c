@@ -17,7 +17,7 @@
 #include"TIMER_interface.h"
 #include"DC_Motor_int.h"
 #include"ultrasonic_int.h"
-#include"servo.h"
+#include"servo_int.h"
 
 #define OBSTACLE_THRESHOLD  50
 #define CRASH_THRESHOLD     25
