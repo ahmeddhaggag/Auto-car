@@ -8,5 +8,5 @@ A car that detects and avoids obstacles, implemented using an ATMega32 microcont
 
 ![Watch the video](https://drive.google.com/file/d/1Mx3hgDJwwPqUGNJqnvGVvAH2e4CAWtwt/view?usp=sharing)
 
-![Photo}(https://drive.google.com/file/d/1N1SMeKvxzV_6AiFvp1zWWEACqC_htdQw/view?usp=drive_link)
+![Photo](https://drive.google.com/file/d/1N1SMeKvxzV_6AiFvp1zWWEACqC_htdQw/view?usp=drive_link)
 
